@@ -6,7 +6,7 @@ NeuroSwarm is a high-performance framework for agentic AI that ditches the tradi
 
 By eliminating CPU/GPU roundtrips, NeuroSwarm achieves a **50x throughput increase** while using **4.5x less memory** than standard frameworks.
 
-![Architecture Diagram](docs/ARCHITECTURE.md#system-overview)
+(docs/ARCHITECTURE.md#system-overview)
 
 ## Key Features
 
