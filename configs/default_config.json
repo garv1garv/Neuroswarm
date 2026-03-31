@@ -1,0 +1,67 @@
+{
+  "name": "NeuroSwarm-Default",
+  "num_gpus": 1,
+  "max_agents": 16,
+  "max_concurrent_tasks": 8,
+  "global_memory_budget_mb": 65536,
+  "enable_profiling": false,
+  "enable_safety_checks": true,
+  "enable_hallucination_detection": true,
+  "metrics_port": 9090,
+  "redis_url": "redis://localhost:6379",
+
+  "planner": {
+    "model": "llama-3.1-70b",
+    "quant_mode": "INT8",
+    "gpu_id": 0,
+    "max_memory_mb": 40960,
+    "max_tokens": 4096,
+    "temperature": 0.3,
+    "top_p": 0.9
+  },
+
+  "executor": {
+    "model": "llama-3.1-8b",
+    "quant_mode": "FP16",
+    "count": 5,
+    "max_memory_mb": 8192,
+    "max_tokens": 2048,
+    "temperature": 0.7,
+    "top_p": 0.95,
+    "timeout_ms": 300000,
+    "enable_sandbox": true
+  },
+
+  "validator": {
+    "model": "llama-3.1-8b",
+    "quant_mode": "FP16",
+    "gpu_id": 0,
+    "max_memory_mb": 8192,
+    "max_tokens": 2048,
+    "temperature": 0.1,
+    "top_p": 0.8
+  },
+
+  "circuit_breaker": {
+    "failure_threshold": 5,
+    "success_threshold": 3,
+    "recovery_timeout_ms": 30000,
+    "failure_rate_threshold": 0.5,
+    "sliding_window_size": 20
+  },
+
+  "sandbox": {
+    "allowed_commands": [
+      "nvidia-smi", "nsys", "ncu", "python", "pytest",
+      "git", "make", "cmake", "cat", "grep", "ls"
+    ],
+    "blocked_commands": [
+      "rm", "format", "shutdown", "reboot", "kill"
+    ],
+    "allowed_paths": ["/tmp/neuroswarm/", "/var/log/neuroswarm/"],
+    "allow_network": true,
+    "allowed_hosts": ["localhost", "127.0.0.1"],
+    "max_output_length": 100000,
+    "max_gpu_alloc_per_call": 1073741824
+  }
+}
